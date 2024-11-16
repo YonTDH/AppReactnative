@@ -50,13 +50,25 @@ const styles = StyleSheet.create({
         marginVertical: 10 
     },
   recommendedItem: { 
-        alignItems: 'center',
-        marginHorizontal: 10
+      width: 120, // Giới hạn chiều rộng mỗi mục
+      marginRight: 10, // Khoảng cách giữa các mục
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#f9f9f9',
+      borderRadius: 8,
+      padding: 10,
+      shadowColor: '#000',
+      shadowOpacity: 0.1,
+      shadowOffset: { width: 0, height: 2 },
+      shadowRadius: 4,
+      elevation: 2,
     },
-  recommendedImage: { 
-        width: 100, 
-        height: 100 
-    },
+  recommendedImage: {
+      width: 100,
+      height: 100,
+      borderRadius: 8,
+      marginBottom: 5,
+},
   categoryTabs: { 
         marginVertical: 10
     },
@@ -102,6 +114,14 @@ const styles = StyleSheet.create({
         fontWeight: 'bold', 
         marginVertical: 10 
     },
+  recommendedSection: {
+      marginTop: 10,
+      marginBottom: 20,
+      paddingHorizontal: 10,
+    },
+
+
+
 });
 
 export default styles;

@@ -1,29 +1,40 @@
-import React from 'react';
-import { View, Text, ScrollView, Image, Button, FlatList } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, ScrollView, Image, Button, FlatList, TouchableOpacity  } from 'react-native';
 import styles from '../styles/styles';
+import Menu from './Menu'
 
-const ProductListScreen = () => (
-  <View style={styles.container}>
-    <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.categoryTabs}>
-      {['Best Sales', 'Best Matched', 'Popular'].map(tab => (
-        <TouchableOpacity key={tab} style={styles.tab}>
-          <Text>{tab}</Text>
-        </TouchableOpacity>
-      ))}
-    </ScrollView>
 
-    <FlatList
-      data={Array.from({ length: 5 })}
-      renderItem={({ item, index }) => (
-        <View style={styles.productItem} key={index}>
-          <Image source={{ uri: 'IMAGE_URL' }} style={styles.productImage} />
-          <Text>Item name</Text>
-          <Text>$999</Text>
-          <Button title="+" onPress={() => {}} />
-        </View>
-      )}
-    />
-  </View>
-);
+const ProductListScreen = ({ route }) => {
+  const { category } = route.params;
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://6738dde0a3a36b5a62ed5fff.mockapi.io/product?category=${category}`)
+      .then((response) => response.json())
+      .then((data) => setProducts(data));
+  }, [category]);
+
+  return ( 
+    <View style={styles.container}>
+      <Text style={styles.sectionTitle}>{category} Products</Text>
+
+      {/* Product List */} 
+      <FlatList
+        data={products}
+        renderItem={({ item, index }) => (
+          <View style={styles.productItem} key={index}>
+            <Image source={{ uri: item.image }} style={styles.productImage} />
+            <Text>{item.name}</Text>
+            <Text>${item.price}</Text>
+            <Button title="+" onPress={() => {}} />
+          </View>
+        )}
+        keyExtractor={(item) => item.id.toString()}
+      />
+      <Menu navigation={navigation} />
+    </View>
+
+  );
+};
 
 export default ProductListScreen;

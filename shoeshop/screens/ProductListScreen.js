@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, ScrollView, Image, Button, FlatList, TouchableOpacity  } from 'react-native';
+import { View, Text, Image, Button, FlatList } from 'react-native';
 import styles from '../styles/styles';
-import Menu from './Menu'
+import Menu from './Menu';
 
-
-const ProductListScreen = ({ route }) => {
+const ProductListScreen = ({ route, navigation }) => { 
   const { category } = route.params;
   const [products, setProducts] = useState([]);
 
@@ -14,11 +13,11 @@ const ProductListScreen = ({ route }) => {
       .then((data) => setProducts(data));
   }, [category]);
 
-  return ( 
+  return (
     <View style={styles.container}>
       <Text style={styles.sectionTitle}>{category} Products</Text>
 
-      {/* Product List */} 
+      {/* Product List */}
       <FlatList
         data={products}
         renderItem={({ item, index }) => (
@@ -33,7 +32,6 @@ const ProductListScreen = ({ route }) => {
       />
       <Menu navigation={navigation} />
     </View>
-
   );
 };
 

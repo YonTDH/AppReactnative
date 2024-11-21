@@ -23,5 +23,5 @@ const AppNavigator = () => (
     </Stack.Navigator>
   </NavigationContainer>
 );
-
+ 
 export default AppNavigator;

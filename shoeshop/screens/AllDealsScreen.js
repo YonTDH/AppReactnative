@@ -28,7 +28,12 @@ const AllDealsScreen = ({ navigation }) => {
         setPromoProduct(lowestPriceProduct); // Set the promo product
       });
   }, []); 
-
+    const handleAddToCart = () => {
+    if (product) {
+        addToCart(product, quantity, selectedColor, selectedSize); 
+      }
+    };
+    
   return (
     <View style={{ flex: 1 }}>
       <ScrollView style={styles.container}>
@@ -71,7 +76,7 @@ const AllDealsScreen = ({ navigation }) => {
           ))}
         </ScrollView>
 
-        {/* Promo Section - Display the product with the lowest price on sale */}
+        {/* Promo Section */}
         {promoProduct && (
           <View style={styles.promoSection}>
             <View style={styles.promoTextContainer}>
@@ -81,11 +86,12 @@ const AllDealsScreen = ({ navigation }) => {
               <TouchableOpacity
                 style={styles.promoButton}
                 onPress={() => {
-                  addToCart(promoProduct, 1); // Add promo product to cart with quantity of 1
+                  navigation.navigate('ProductDetail', { productId: promoProduct.id });
                 }}
               >
                 <Text style={styles.promoButtonText}>ADD TO CART</Text>
               </TouchableOpacity>
+
             </View>
             <View style={styles.promoImageContainer}>
               <Image

@@ -9,35 +9,39 @@ export const useCart = () => {
 export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
-  const addToCart = (item, quantity) => {
-    setCartItems((prevItems) => {
-      const existingItem = prevItems.find(cartItem => cartItem.id === item.id);
-      if (existingItem) {
-        return prevItems.map(cartItem =>
-          cartItem.id === item.id ? { ...cartItem, quantity: cartItem.quantity + quantity } : cartItem
-        );
-      }
-      return [...prevItems, { ...item, quantity }];
-    });
-  };
+  const addToCart = (product, quantity = 1, color, size) => {
+  setCartItems((prevItems) => {
+    const existingItem = prevItems.find(
+      (item) => item.id === product.id && item.color === color && item.size === size
+    );
+    
+    if (existingItem) {
+      // Nếu sản phẩm với màu và size đã tồn tại, chỉ cần cập nhật số lượng
+      return prevItems.map((item) =>
+        item.id === product.id && item.color === color && item.size === size
+          ? { ...item, quantity: item.quantity + quantity }
+          : item
+      );
+    } else {
+      // Thêm sản phẩm mới với color và size
+      return [...prevItems, { ...product, quantity, color, size }];
+    }
+  });
+};
 
-  const removeFromCart = (itemId) => {
-    setCartItems((prevItems) => {
-      const updatedItems = prevItems.map(item => {
-        if (item.id === itemId) {
-          if (item.quantity > 1) {
-            // Decrease quantity if it's more than 1
-            return { ...item, quantity: item.quantity - 1 };
-          }
-          // Remove item from cart if quantity is 1
-          return null;
-        }
-        return item;
-      }).filter(item => item !== null); // Remove null values from the array
 
-      return updatedItems;
-    });
-  };
+const removeFromCart = (id, color, size, removeAll = false) => {
+  setCartItems((prevItems) =>
+    prevItems
+      .map((item) =>
+        item.id === id && item.color === color && item.size === size
+          ? { ...item, quantity: removeAll ? 0 : item.quantity - 1 } // Giảm số lượng hoặc xóa nếu removeAll là true
+          : item
+      )
+      .filter((item) => item.quantity > 0) // Loại bỏ sản phẩm có quantity <= 0
+  );
+};
+
 
   const clearCart = () => {
     setCartItems([]);

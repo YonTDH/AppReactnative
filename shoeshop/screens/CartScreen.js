@@ -13,7 +13,7 @@ const CartScreen = () => {
       sum += item.price * item.quantity;
     });
     if (voucher === 'DISCOUNT10') {
-      sum = sum * 0.9; 
+      sum = sum * 0.9; // Apply 10% discount
     }
     setTotal(sum);
   }, [cartItems, voucher]);
@@ -23,22 +23,23 @@ const CartScreen = () => {
       <ScrollView contentContainerStyle={styles.cartListContainer}>
         <FlatList
           data={cartItems}
-          keyExtractor={(item) => item.id}
-          horizontal={false}  
+          keyExtractor={(item) => `${item.id}-${item.color}-${item.size}`} // Bao gồm size để tránh trùng lặp
+          horizontal={false}
           renderItem={({ item }) => (
             <View style={styles.cartItem}>
               <Text style={styles.itemName}>{item.name}</Text>
               <View style={styles.itemDetails}>
                 <Text style={styles.itemPrice}>${item.price}</Text>
                 <Text style={styles.itemQuantity}>Qty: {item.quantity}</Text>
-                <Text style={styles.itemQuantity}>color: {item.color}</Text>
+                <Text style={styles.itemQuantity}>Color: {item.color}</Text> {/* Hiển thị màu */}
+                <Text style={styles.itemQuantity}>Size: {item.size}</Text> {/* Hiển thị size */}
                 <Button
                   title="-"
                   onPress={() => {
                     if (item.quantity > 1) {
-                      removeFromCart(item.id); // Decrease quantity
+                      removeFromCart(item.id, item.color, item.size); // Xóa theo ID, màu và size
                     } else {
-                      removeFromCart(item.id, true); // Remove item from cart if quantity is 1
+                      removeFromCart(item.id, item.color, item.size, true); // Xóa sản phẩm khi quantity = 1
                     }
                   }}
                 />
@@ -46,6 +47,8 @@ const CartScreen = () => {
             </View>
           )}
         />
+
+
       </ScrollView>
 
       <View style={styles.voucherContainer}>
@@ -71,12 +74,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9f9f9',
   },
   cartListContainer: {
-    paddingBottom: 20, 
+    paddingBottom: 20, // Add padding at the bottom for smooth scroll
   },
   cartItem: {
-    flexDirection: 'column', 
+    flexDirection: 'column', // Stack the content vertically
     padding: 15,
-    marginBottom: 15, 
+    marginBottom: 15, // Add space between items
     backgroundColor: '#fff',
     borderRadius: 8,
     shadowColor: '#000',
@@ -87,12 +90,12 @@ const styles = StyleSheet.create({
   itemName: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 10, 
+    marginBottom: 10, // Add space below the name
   },
   itemDetails: {
-    flexDirection: 'row', 
+    flexDirection: 'row', // Keep price, quantity, and button in a row
     alignItems: 'center',
-    justifyContent: 'space-between', 
+    justifyContent: 'space-between', // Spread out the elements
   },
   itemPrice: {
     fontSize: 16,

@@ -220,6 +220,11 @@ searchInput: {
     tintColor: '#333', // Màu của biểu tượng
   },
 
+  priceInputContainer: { flexDirection: 'row', alignItems: 'center', marginVertical: 10 },
+priceInput: { flex: 1, borderWidth: 1, borderColor: '#ccc', padding: 10, borderRadius: 5, marginHorizontal: 5 },
+priceRangeSeparator: { fontSize: 16, alignSelf: 'center' },
+applyButton: { backgroundColor: '#007BFF', padding: 15, borderRadius: 5, marginTop: 20 },
+applyButtonText: { color: '#fff', fontWeight: 'bold', textAlign: 'center' },
 
 });
 

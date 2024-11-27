@@ -1,53 +1,54 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
-const Menu = ({ navigation }) => (
-  <View style={styles.footer}>
-    {/* Home */}
-    <TouchableOpacity style={styles.footerItem} onPress={() => navigation.navigate('AllDeals')}>
-      <View style={styles.footerIconText}>
-        <Image
-          source={{ uri: 'https://cdn-icons-png.flaticon.com/128/3917/3917033.png' }}
-          style={styles.footerIcon}
-        />
-        <Text style={styles.footerText}>Home</Text>
-      </View>
-    </TouchableOpacity>
+const Menu = ({ navigation, userId }) => {
+  // Lấy userId từ props
+  return (
+    <View style={styles.footer}>
+      {/* Home */}
+      <TouchableOpacity style={styles.footerItem} onPress={() => navigation.navigate('AllDeals')}>
+        <View style={styles.footerIconText}>
+          <Image
+            source={{ uri: 'https://cdn-icons-png.flaticon.com/128/3917/3917033.png' }}
+            style={styles.footerIcon}
+          />
+          <Text style={styles.footerText}>Home</Text>
+        </View>
+      </TouchableOpacity>
+      {/* Search */}
+      <TouchableOpacity style={styles.footerItem} onPress={() => navigation.navigate('Search')}>
+        <View style={styles.footerIconText}>
+          <Image
+            source={{ uri: 'https://cdn-icons-png.flaticon.com/128/3917/3917754.png' }}
+            style={styles.footerIcon}
+          />
+          <Text style={styles.footerText}>Search</Text>
+        </View>
+      </TouchableOpacity>
 
-    {/* Search */}
-    <TouchableOpacity style={styles.footerItem} onPress={() => navigation.navigate('Search')}>
-      <View style={styles.footerIconText}>
-        <Image
-          source={{ uri: 'https://cdn-icons-png.flaticon.com/128/3917/3917754.png' }}
-          style={styles.footerIcon}
-        />
-        <Text style={styles.footerText}>Search</Text>
-      </View>
-    </TouchableOpacity>
-
-    {/* Cart */}
-    <TouchableOpacity style={styles.footerItem} onPress={() => navigation.navigate('Cart')}>
-      <View style={styles.footerIconText}>
-        <Image
-          source={{ uri: 'https://cdn-icons-png.flaticon.com/128/3916/3916598.png' }}
-          style={styles.footerIcon}
-        />
-        <Text style={styles.footerText}>Cart</Text>
-      </View>
-    </TouchableOpacity>
-
-    {/* Account */}
-    <TouchableOpacity style={styles.footerItem} onPress={() => navigation.navigate('Account')}>
-      <View style={styles.footerIconText}>
-        <Image
-          source={{ uri: 'https://cdn-icons-png.flaticon.com/128/3917/3917688.png' }}
-          style={styles.footerIcon}
-        />
-        <Text style={styles.footerText}>Account</Text>
-      </View>
-    </TouchableOpacity>
-  </View>
-);
+      {/* Cart */}
+      <TouchableOpacity style={styles.footerItem} onPress={() => navigation.navigate('Cart')}>
+        <View style={styles.footerIconText}>
+          <Image
+            source={{ uri: 'https://cdn-icons-png.flaticon.com/128/3916/3916598.png' }}
+            style={styles.footerIcon}
+          />
+          <Text style={styles.footerText}>Cart</Text>
+        </View>
+      </TouchableOpacity>
+      {/* Account */}
+      <TouchableOpacity style={styles.footerItem} onPress={() => navigation.navigate('Account', { userId })}>
+        <View style={styles.footerIconText}>
+          <Image
+            source={{ uri: 'https://cdn-icons-png.flaticon.com/128/3917/3917688.png' }}
+            style={styles.footerIcon}
+          />
+          <Text style={styles.footerText}>Account</Text>
+        </View>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   footer: {

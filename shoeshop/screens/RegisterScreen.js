@@ -25,7 +25,7 @@ const RegisterScreen = ({ navigation }) => {
       if (response.ok) {
         setLoading(false);
         Alert.alert('Success', 'Account created successfully!', [
-          { text: 'OK', onPress: () => navigation.goBack() },
+          { text: 'OK', onPress: () => navigation.navigate('Login') },  // Quay lại trang đăng nhập
         ]);
       } else {
         throw new Error('Failed to create account');
@@ -40,6 +40,13 @@ const RegisterScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Register</Text>
+      
+      {/* Nút quay lại */}
+      <Button
+        title="Back to Login"
+        onPress={() => navigation.navigate('Login')} // Điều hướng trực tiếp đến trang đăng nhập
+      />
+
       <TextInput
         style={styles.input}
         placeholder="Username"

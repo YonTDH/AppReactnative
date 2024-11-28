@@ -13,6 +13,7 @@ import LoginScreen from '../screens/LoginScreen';
 import RegisterScreen from '../screens/RegisterScreen';
 import AccountScreen from '../screens/AccountScreen';
 import Menu from '../screens/Menu';
+import ProductSearchScreen from '../screens/ProductSearchScreen';
 
 const Stack = createStackNavigator();
 
@@ -42,6 +43,7 @@ const AppNavigator = () => {
               <Stack.Screen name="ProductDetail" component={ProductDetailScreen} options={{ title: 'Product Details' }} />
               <Stack.Screen name="Filter" component={FilterScreen} options={{ title: 'Filters' }} />
               <Stack.Screen name="Checkout" component={CheckoutScreen} options={{ title: 'Checkout' }} />
+              <Stack.Screen name="ProductSearch" component={ProductSearchScreen} options={{ title: 'Search Products' }} />
               <Stack.Screen
                 name="Account"
                 component={AccountScreen}

@@ -16,7 +16,8 @@ const Menu = ({ navigation, userId }) => {
         </View>
       </TouchableOpacity>
       {/* Search */}
-      <TouchableOpacity style={styles.footerItem} onPress={() => navigation.navigate('Search')}>
+      {/* Search */}
+      <TouchableOpacity style={styles.footerItem} onPress={() => navigation.navigate('ProductSearch')}>
         <View style={styles.footerIconText}>
           <Image
             source={{ uri: 'https://cdn-icons-png.flaticon.com/128/3917/3917754.png' }}
@@ -25,6 +26,7 @@ const Menu = ({ navigation, userId }) => {
           <Text style={styles.footerText}>Search</Text>
         </View>
       </TouchableOpacity>
+
 
       {/* Cart */}
       <TouchableOpacity style={styles.footerItem} onPress={() => navigation.navigate('Cart')}>
